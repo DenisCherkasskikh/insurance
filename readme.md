@@ -1,5 +1,11 @@
 # insurance
-**insurance** is a blockchain built using Cosmos SDK and Tendermint and created with [Ignite CLI](https://ignite.com/cli).
+**insurance** is a blockchain built using Cosmos SDK and Tendermint and created with [Ignite CLI](https://ignite.com/cli).It allows you to add car damage records.
+
+Versions used are:
+
+*Go: 1.18.3
+*Ignite CLI: 0.22.2
+*Cosmos SDK: 0.45.4
 
 ## Get started
 
@@ -13,40 +19,27 @@ ignite chain serve
 
 Your blockchain in development can be configured with `config.yml`. To learn more, see the [Ignite CLI docs](https://docs.ignite.com).
 
-### Web Frontend
 
-Ignite CLI has scaffolded a Vue.js-based web app in the `vue` directory. Run the following commands to install dependencies and start the app:
+## Adding records
 
-```
-cd vue
-npm install
-npm run serve
-```
-
-The frontend app is built using the `@starport/vue` and `@starport/vuex` packages. For details, see the [monorepo for Ignite front-end development](https://github.com/ignite/web).
-
-## Release
-To release a new version of your blockchain, create and push a new tag with `v` prefix. A new draft release with the configured targets will be created.
+To add new record use:
 
 ```
-git tag v0.1
-git push origin v0.1
+./insuranced tx insurance add-record [brand] [model] [year] [owner] [licensePlate] [vinNumber] [odometer] [side] [part] [payout] --from insurance_company
 ```
+`insurance_company` should match your account name
 
-After a draft release is created, make your final changes from the release page and publish it.
 
-### Install
-To install the latest version of your blockchain node's binary, execute the following command on your machine:
+## Viewing records
+
+*To view all added records use:
 
 ```
-curl https://get.ignite.com/DenisCherkasskikh/insurance@latest! | sudo bash
+./insuranced query insurance list-crash-rec
 ```
-`DenisCherkasskikh/insurance` should match the `username` and `repo_name` of the Github repository to which the source code was pushed. Learn more about [the install process](https://github.com/allinbits/starport-installer).
+*To view added record by it's index use:
 
-## Learn more
-
-- [Ignite CLI](https://ignite.com/cli)
-- [Tutorials](https://docs.ignite.com/guide)
-- [Ignite CLI docs](https://docs.ignite.com)
-- [Cosmos SDK docs](https://docs.cosmos.network)
-- [Developer Chat](https://discord.gg/ignite)
+```
+./insuranced query insurance show-crash-rec recNum
+```
+`recNum` should match index of record you want to view
