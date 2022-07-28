@@ -1,10 +1,10 @@
 /* eslint-disable */
-import { Reader, Writer } from "protobufjs/minimal";
+import { Writer, Reader } from "protobufjs/minimal";
 
 export const protobufPackage = "denischerkasskikh.insurance.insurance";
 
-export interface MsgAddRecord {
-  creator: string;
+export interface CrashRec {
+  index: string;
   brand: string;
   model: string;
   year: string;
@@ -17,12 +17,8 @@ export interface MsgAddRecord {
   payout: string;
 }
 
-export interface MsgAddRecordResponse {
-  recNum: string;
-}
-
-const baseMsgAddRecord: object = {
-  creator: "",
+const baseCrashRec: object = {
+  index: "",
   brand: "",
   model: "",
   year: "",
@@ -35,10 +31,10 @@ const baseMsgAddRecord: object = {
   payout: "",
 };
 
-export const MsgAddRecord = {
-  encode(message: MsgAddRecord, writer: Writer = Writer.create()): Writer {
-    if (message.creator !== "") {
-      writer.uint32(10).string(message.creator);
+export const CrashRec = {
+  encode(message: CrashRec, writer: Writer = Writer.create()): Writer {
+    if (message.index !== "") {
+      writer.uint32(10).string(message.index);
     }
     if (message.brand !== "") {
       writer.uint32(18).string(message.brand);
@@ -73,15 +69,15 @@ export const MsgAddRecord = {
     return writer;
   },
 
-  decode(input: Reader | Uint8Array, length?: number): MsgAddRecord {
+  decode(input: Reader | Uint8Array, length?: number): CrashRec {
     const reader = input instanceof Uint8Array ? new Reader(input) : input;
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseMsgAddRecord } as MsgAddRecord;
+    const message = { ...baseCrashRec } as CrashRec;
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.creator = reader.string();
+          message.index = reader.string();
           break;
         case 2:
           message.brand = reader.string();
@@ -121,12 +117,12 @@ export const MsgAddRecord = {
     return message;
   },
 
-  fromJSON(object: any): MsgAddRecord {
-    const message = { ...baseMsgAddRecord } as MsgAddRecord;
-    if (object.creator !== undefined && object.creator !== null) {
-      message.creator = String(object.creator);
+  fromJSON(object: any): CrashRec {
+    const message = { ...baseCrashRec } as CrashRec;
+    if (object.index !== undefined && object.index !== null) {
+      message.index = String(object.index);
     } else {
-      message.creator = "";
+      message.index = "";
     }
     if (object.brand !== undefined && object.brand !== null) {
       message.brand = String(object.brand);
@@ -181,9 +177,9 @@ export const MsgAddRecord = {
     return message;
   },
 
-  toJSON(message: MsgAddRecord): unknown {
+  toJSON(message: CrashRec): unknown {
     const obj: any = {};
-    message.creator !== undefined && (obj.creator = message.creator);
+    message.index !== undefined && (obj.index = message.index);
     message.brand !== undefined && (obj.brand = message.brand);
     message.model !== undefined && (obj.model = message.model);
     message.year !== undefined && (obj.year = message.year);
@@ -198,12 +194,12 @@ export const MsgAddRecord = {
     return obj;
   },
 
-  fromPartial(object: DeepPartial<MsgAddRecord>): MsgAddRecord {
-    const message = { ...baseMsgAddRecord } as MsgAddRecord;
-    if (object.creator !== undefined && object.creator !== null) {
-      message.creator = object.creator;
+  fromPartial(object: DeepPartial<CrashRec>): CrashRec {
+    const message = { ...baseCrashRec } as CrashRec;
+    if (object.index !== undefined && object.index !== null) {
+      message.index = object.index;
     } else {
-      message.creator = "";
+      message.index = "";
     }
     if (object.brand !== undefined && object.brand !== null) {
       message.brand = object.brand;
@@ -258,96 +254,6 @@ export const MsgAddRecord = {
     return message;
   },
 };
-
-const baseMsgAddRecordResponse: object = { recNum: "" };
-
-export const MsgAddRecordResponse = {
-  encode(
-    message: MsgAddRecordResponse,
-    writer: Writer = Writer.create()
-  ): Writer {
-    if (message.recNum !== "") {
-      writer.uint32(10).string(message.recNum);
-    }
-    return writer;
-  },
-
-  decode(input: Reader | Uint8Array, length?: number): MsgAddRecordResponse {
-    const reader = input instanceof Uint8Array ? new Reader(input) : input;
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseMsgAddRecordResponse } as MsgAddRecordResponse;
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          message.recNum = reader.string();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-
-  fromJSON(object: any): MsgAddRecordResponse {
-    const message = { ...baseMsgAddRecordResponse } as MsgAddRecordResponse;
-    if (object.recNum !== undefined && object.recNum !== null) {
-      message.recNum = String(object.recNum);
-    } else {
-      message.recNum = "";
-    }
-    return message;
-  },
-
-  toJSON(message: MsgAddRecordResponse): unknown {
-    const obj: any = {};
-    message.recNum !== undefined && (obj.recNum = message.recNum);
-    return obj;
-  },
-
-  fromPartial(object: DeepPartial<MsgAddRecordResponse>): MsgAddRecordResponse {
-    const message = { ...baseMsgAddRecordResponse } as MsgAddRecordResponse;
-    if (object.recNum !== undefined && object.recNum !== null) {
-      message.recNum = object.recNum;
-    } else {
-      message.recNum = "";
-    }
-    return message;
-  },
-};
-
-/** Msg defines the Msg service. */
-export interface Msg {
-  /** this line is used by starport scaffolding # proto/tx/rpc */
-  AddRecord(request: MsgAddRecord): Promise<MsgAddRecordResponse>;
-}
-
-export class MsgClientImpl implements Msg {
-  private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
-  }
-  AddRecord(request: MsgAddRecord): Promise<MsgAddRecordResponse> {
-    const data = MsgAddRecord.encode(request).finish();
-    const promise = this.rpc.request(
-      "denischerkasskikh.insurance.insurance.Msg",
-      "AddRecord",
-      data
-    );
-    return promise.then((data) =>
-      MsgAddRecordResponse.decode(new Reader(data))
-    );
-  }
-}
-
-interface Rpc {
-  request(
-    service: string,
-    method: string,
-    data: Uint8Array
-  ): Promise<Uint8Array>;
-}
 
 type Builtin = Date | Function | Uint8Array | string | number | undefined;
 export type DeepPartial<T> = T extends Builtin

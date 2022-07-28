@@ -1,0 +1,9 @@
+syntax = "proto3";
+package denischerkasskikh.insurance.insurance;
+
+option go_package = "github.com/DenisCherkasskikh/insurance/x/insurance/types";
+
+message NextRec {
+  uint64 recNum = 1; 
+  
+}

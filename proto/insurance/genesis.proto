@@ -3,6 +3,8 @@ package denischerkasskikh.insurance.insurance;
 
 import "gogoproto/gogo.proto";
 import "insurance/params.proto";
+import "insurance/next_rec.proto";
+import "insurance/crash_rec.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 
 option go_package = "github.com/DenisCherkasskikh/insurance/x/insurance/types";
@@ -10,5 +12,7 @@ option go_package = "github.com/DenisCherkasskikh/insurance/x/insurance/types";
 // GenesisState defines the insurance module's genesis state.
 message GenesisState {
   Params params = 1 [(gogoproto.nullable) = false];
+  NextRec nextRec = 2;
+  repeated CrashRec crashRecList = 3 [(gogoproto.nullable) = false];
   // this line is used by starport scaffolding # genesis/proto/state
 }

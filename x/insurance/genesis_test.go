@@ -14,6 +14,17 @@ func TestGenesis(t *testing.T) {
 	genesisState := types.GenesisState{
 		Params: types.DefaultParams(),
 
+		NextRec: &types.NextRec{
+			RecNum: 47,
+		},
+		CrashRecList: []types.CrashRec{
+			{
+				Index: "0",
+			},
+			{
+				Index: "1",
+			},
+		},
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
@@ -25,5 +36,7 @@ func TestGenesis(t *testing.T) {
 	nullify.Fill(&genesisState)
 	nullify.Fill(got)
 
+	require.Equal(t, genesisState.NextRec, got.NextRec)
+	require.ElementsMatch(t, genesisState.CrashRecList, got.CrashRecList)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

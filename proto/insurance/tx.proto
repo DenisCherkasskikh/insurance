@@ -7,7 +7,26 @@ option go_package = "github.com/DenisCherkasskikh/insurance/x/insurance/types";
 
 // Msg defines the Msg service.
 service Msg {
-    // this line is used by starport scaffolding # proto/tx/rpc
+      rpc AddRecord(MsgAddRecord) returns (MsgAddRecordResponse);
+// this line is used by starport scaffolding # proto/tx/rpc
+}
+
+message MsgAddRecord {
+  string creator = 1;
+  string brand = 2;
+  string model = 3;
+  string year = 4;
+  string owner = 5;
+  string licensePlate = 6;
+  string vinNumber = 7;
+  string odometer = 8;
+  string side = 9;
+  string part = 10;
+  string payout = 11;
+}
+
+message MsgAddRecordResponse {
+  string recNum = 1;
 }
 
 // this line is used by starport scaffolding # proto/tx/message
