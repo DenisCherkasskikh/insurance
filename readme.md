@@ -37,6 +37,7 @@ Your blockchain in development can be configured with `config.yml`. To learn mor
 ```
 ./insuranced query insurance list-crash-rec
 ```
+
 * To view added record by it's index use:
 
 ```
