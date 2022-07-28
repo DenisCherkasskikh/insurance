@@ -3,9 +3,9 @@
 
 Versions used are:
 
-*Go: 1.18.3
-*Ignite CLI: 0.22.2
-*Cosmos SDK: 0.45.4
+* Go: 1.18.3
+* Ignite CLI: 0.22.2
+* Cosmos SDK: 0.45.4
 
 ## Get started
 
@@ -22,7 +22,7 @@ Your blockchain in development can be configured with `config.yml`. To learn mor
 
 ## Adding records
 
-To add new record use:
+* To add new record use:
 
 ```
 ./insuranced tx insurance add-record [brand] [model] [year] [owner] [licensePlate] [vinNumber] [odometer] [side] [part] [payout] --from insurance_company
@@ -32,7 +32,7 @@ To add new record use:
 
 ## Viewing records
 
-*To view all added records use:
+* To view all added records use:
 
 ```
 ./insuranced query insurance list-crash-rec
